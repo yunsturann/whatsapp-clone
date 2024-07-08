@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+}
+
+:root {
+  --light-gray: #f0f2f5;
+  --border-gray: #d4d6da;
+  --main-green: #00a884;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e3df;
+
+  ::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -10;
+    content: "";
+    width: 100%;
+    height: 130px;
+    background: var(--main-green);
+  }
+}
+
+.app {
+  display: flex;
+  justify-content: space-between;
+  height: 96vh;
+  width: calc(100vw - 60px);
+  max-width: 1700px;
+  background: white;
+
+  @media (width < 1440px) {
+    height: 100vh;
+    width: 100vw;
+  }
+}
