@@ -3,12 +3,15 @@ import Sidebar from "./components/sidebar";
 
 function App() {
   return (
-    <main className="app">
-      {/* Sidebar */}
-      <Sidebar />
-      {/* Chat */}
-      <Chat />
-    </main>
+    <>
+      <div className="main-background"></div>
+      <main className="app shadow-lg">
+        {/* Sidebar */}
+        <Sidebar />
+        {/* Chat */}
+        <Chat />
+      </main>
+    </>
   );
 }
 

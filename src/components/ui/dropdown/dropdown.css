@@ -1,0 +1,45 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .wrapper {
+    position: absolute;
+    z-index: 50;
+    background: #ffffff;
+    border-radius: 4px;
+    width: 225px;
+    padding: 9px 0;
+    margin: 4px;
+
+    &.top {
+      bottom: 0;
+      right: 0;
+    }
+
+    &.bottom {
+      top: 100%;
+      right: 0;
+    }
+
+    &.top-right {
+      bottom: 0;
+      left: 0;
+    }
+
+    &.bottom-right {
+      top: 0;
+      left: 0;
+    }
+
+    .dropdown-item {
+      font-size: 14.5px;
+      padding: 12px 24px;
+      color: #3b4a54;
+      font-weight: 500;
+
+      &:hover {
+        background-color: var(--light-gray);
+      }
+    }
+  }
+}

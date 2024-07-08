@@ -1,5 +1,13 @@
+import ChatListItem from "./chat-list-item";
+
 const ChatList = () => {
-  return <div>ChatList</div>;
+  return (
+    <ul className="chat-list">
+      <ChatListItem />
+      <ChatListItem />
+      <ChatListItem />
+    </ul>
+  );
 };
 
 export default ChatList;
