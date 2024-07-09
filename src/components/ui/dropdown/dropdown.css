@@ -31,11 +31,17 @@
       left: 0;
     }
 
+    hr {
+      margin: 4px 0px;
+      border: 1px solid var(--light-gray);
+    }
+
     .dropdown-item {
       font-size: 14.5px;
       padding: 12px 24px;
       color: #3b4a54;
       font-weight: 500;
+      cursor: pointer;
 
       &:hover {
         background-color: var(--light-gray);

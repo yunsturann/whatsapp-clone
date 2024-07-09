@@ -26,6 +26,10 @@ const Navbar = () => {
             <DropdownItem>New community</DropdownItem>
             <DropdownItem>Archived</DropdownItem>
             <DropdownItem>Starred messages</DropdownItem>
+            <DropdownItem>Settings</DropdownItem>
+            <DropdownItem>Logout</DropdownItem>
+            <hr />
+            <DropdownItem>Get Whatsapp for Windows</DropdownItem>
           </Dropdown>
         </li>
       </ul>

@@ -1,10 +1,17 @@
 import "./dropdown.css";
 
 // ** React Imports
-import { Dispatch, HTMLAttributes, ReactNode, SetStateAction } from "react";
+import {
+  Dispatch,
+  HTMLAttributes,
+  ReactNode,
+  SetStateAction,
+  useRef,
+} from "react";
 
 // ** Icons
 import { FaEllipsisVertical } from "react-icons/fa6";
+import useClickOutside from "../../../hooks/shared/use-click-outside";
 
 interface DropdownProps {
   isOpen: boolean;
@@ -23,8 +30,14 @@ const Dropdown = (props: DropdownProps) => {
     position = "bottom",
   } = props;
 
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useClickOutside(ref, () => {
+    setIsOpen(false);
+  });
+
   return (
-    <div className="dropdown">
+    <div className="dropdown" ref={ref}>
       {/* Trigger Element */}
 
       <div onClick={() => setIsOpen((prev) => !prev)}>
@@ -37,9 +50,7 @@ const Dropdown = (props: DropdownProps) => {
 
       {/* Action Item List */}
       {isOpen && (
-        <div className={`wrapper ${position} shadow-left-bottom`}>
-          {children}
-        </div>
+        <div className={`wrapper ${position} shadow-md`}>{children}</div>
       )}
     </div>
   );

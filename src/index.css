@@ -93,10 +93,10 @@ body {
 
 /* Shadows */
 
-.shadow-left-bottom {
-  box-shadow: -5px 5px 3px 0 rgb(0 0 0 / 0.1);
+.shadow-md {
+  box-shadow: 0 0 2px 3px rgb(0 0 0 / 0.1);
 }
 
 .shadow-lg {
-  box-shadow: 0 0 2px 5px rgb(0 0 0 /0.1);
+  box-shadow: 0 0 3px 5px rgb(0 0 0 /0.1);
 }
