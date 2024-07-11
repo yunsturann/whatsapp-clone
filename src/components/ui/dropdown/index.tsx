@@ -19,6 +19,7 @@ interface DropdownProps {
   position?: "top" | "bottom" | "top-right" | "bottom-right";
   triggerElement?: ReactNode;
   children: ReactNode;
+  parentClassNames?: string;
 }
 
 const Dropdown = (props: DropdownProps) => {
@@ -37,7 +38,7 @@ const Dropdown = (props: DropdownProps) => {
   });
 
   return (
-    <div className="dropdown" ref={ref}>
+    <div className={"dropdown"} ref={ref}>
       {/* Trigger Element */}
 
       <div onClick={() => setIsOpen((prev) => !prev)}>

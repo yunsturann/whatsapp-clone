@@ -64,6 +64,7 @@ const CreateText = () => {
           type="text"
           value={text}
           onChange={({ target }) => setText(target.value)}
+          placeholder="Type a message"
         />
 
         <button type="submit" className="icon">

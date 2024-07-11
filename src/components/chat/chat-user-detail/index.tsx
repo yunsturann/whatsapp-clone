@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ** Custom Components
 import Dropdown, { DropdownItem } from "../../ui/dropdown";
@@ -8,6 +8,13 @@ import { GrSearch } from "react-icons/gr";
 
 const ChatUserDetail = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showContactInfo, setShowContactInfo] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowContactInfo(false), 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="chat-user-detail">
@@ -17,7 +24,7 @@ const ChatUserDetail = () => {
 
         <div className="username">
           <h2>John Doe</h2>
-          <p>click here for contact info</p>
+          {showContactInfo && <p>click here for contact info</p>}
         </div>
       </div>
 

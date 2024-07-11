@@ -60,6 +60,83 @@
       background-image: url("/images/chat-bg.png");
       background-position: center;
       object-fit: cover;
+      padding-bottom: 12px;
+      overflow-y: auto;
+
+      .message-item {
+        padding: 0 63px;
+        margin-top: 2px;
+        display: flex;
+
+        .content {
+          position: relative;
+          background-color: #ffffff;
+          max-width: 65%;
+          width: fit-content;
+          padding: 6px 7px 8px 9px;
+          border-radius: 6px;
+          font-size: 14.2px;
+          display: flex;
+          gap: 6px;
+
+          &.own {
+            background-color: #d9fdd3;
+            margin-left: auto;
+          }
+
+          .detail {
+            display: flex;
+            align-items: flex-end;
+            color: #667781;
+            text-wrap: nowrap;
+            transform: translateY(4px);
+
+            span {
+              font-size: 11px;
+              margin-right: 3px;
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+              transform: translateY(2px);
+            }
+          }
+
+          .dropdown {
+            position: absolute !important;
+            top: 0 !important;
+            right: 0 !important;
+            z-index: 100;
+
+            .wrapper {
+              width: 170px;
+            }
+
+            .action {
+              padding: 3px;
+              border-radius: 50%;
+              opacity: 0;
+              pointer-events: none;
+              transform: translateX(10px);
+              cursor: pointer;
+
+              svg {
+                width: 20px;
+                height: 20px;
+                color: #667781;
+              }
+
+              &.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateX(0);
+                transition: opacity 0.3s, transform 0.15s;
+              }
+            }
+          }
+        }
+      }
     }
 
     .create-text {
