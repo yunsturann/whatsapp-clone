@@ -1,0 +1,163 @@
+.contact-info {
+  height: 100%;
+  background-color: var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 40px;
+  overflow-y: auto;
+
+  .user-detail {
+    padding: 30px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    h3 {
+      font-size: 24px;
+      color: #3b4a54;
+    }
+  }
+
+  .about {
+    background: #ffffff;
+    padding: 17px 30px 19px;
+
+    h4 {
+      font-size: 15px;
+      margin-bottom: 12px;
+      color: #667781;
+    }
+
+    p {
+      font-size: 17px;
+      color: #111b21;
+    }
+  }
+
+  .shared-media {
+    background: #ffffff;
+    padding: 17px 30px 19px;
+    color: #667781;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      cursor: pointer;
+
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        svg {
+          width: 21px;
+          height: 21px;
+        }
+      }
+    }
+  }
+
+  .media-preview {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    .preview-item {
+      border-radius: 20px;
+      height: 116px;
+      width: 116px;
+      padding: 5px;
+      background: linear-gradient(180deg, #ebecee 70%, #111b2173 100%);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 14px;
+      }
+    }
+  }
+
+  .chat-actions {
+    padding: 0 30px;
+    background-color: #ffffff;
+
+    .item {
+      padding: 15px 0;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+
+      .icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .texts {
+        flex: 1;
+        padding: 0 8px;
+        margin-left: 12px;
+
+        p {
+          font-size: 17px;
+          color: #111b21;
+        }
+
+        span {
+          font-size: 14px;
+          color: #54656f;
+        }
+      }
+
+      svg {
+        width: 21px;
+        height: 21px;
+        color: #667781;
+      }
+    }
+  }
+
+  .user-actions {
+    background: #ffffff;
+    color: #ea0038;
+
+    .item {
+      height: 54px;
+      padding: 0 13px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #dfdfdf;
+      }
+
+      svg {
+        width: 21px;
+        height: 21px;
+        margin: 0 25px;
+      }
+
+      p {
+        font-size: 17px;
+        letter-spacing: 0.2px;
+        font-weight: thin;
+      }
+    }
+  }
+}

@@ -12,6 +12,17 @@
   --main-green: #00a884;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  line-height: normal;
+  font-style: normal;
+}
+
 body {
   height: 100vh;
   display: flex;
