@@ -23,6 +23,18 @@ h6 {
   font-style: normal;
 }
 
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #f1f1f1 !important;
+    color: #b3b3b3 !important;
+    cursor: not-allowed !important;
+  }
+}
+
 body {
   height: 100vh;
   display: flex;
