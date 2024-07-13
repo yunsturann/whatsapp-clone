@@ -92,7 +92,7 @@ const Register = (props: RegisterProps) => {
           avatar: imgUrl,
           blocked: [],
         }),
-        await setDoc(doc(db, "userchats", response.user.uid), {
+        await setDoc(doc(db, "chatlist", response.user.uid), {
           chats: [],
         }),
       ]);

@@ -1,11 +1,14 @@
+import "./sidebar.css";
+
+// ** Custom Components
 import ChatList from "./chat-list";
 import FilterChatList from "./filter-chat-list";
+import LeftSection from "./left-section";
 import Navbar from "./navbar";
-import "./sidebar.css";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar-section">
+    <aside className="sidebar-section">
       {/* navbar */}
       <Navbar />
 
@@ -14,7 +17,10 @@ const Sidebar = () => {
 
       {/* Chat List */}
       <ChatList />
-    </div>
+
+      {/* Left Section */}
+      <LeftSection />
+    </aside>
   );
 };
 

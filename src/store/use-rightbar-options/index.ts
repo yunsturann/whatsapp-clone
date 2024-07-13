@@ -11,13 +11,16 @@ interface RightbarOptionsStore {
 export const useRightbarOptions = create<RightbarOptionsStore>((set) => ({
   isOpen: false,
   setIsOpen: (by) => {
-    set((state) => ({ ...state, isOpen: by }));
+    set(() => ({ isOpen: by }));
+
+    // // ** If you want to update the state based on the previous state
+    // set((state) => ({...state, isOpen: by }));
   },
   rightSectionProps: {
     title: "",
     children: null,
   },
   setRightSectionProps: (props) => {
-    set((state) => ({ ...state, rightSectionProps: props }));
+    set(() => ({ rightSectionProps: props }));
   },
 }));
