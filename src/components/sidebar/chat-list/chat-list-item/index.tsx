@@ -7,7 +7,9 @@ import { IoChevronDown } from "react-icons/io5";
 // ** Custom Components
 import Dropdown, { DropdownItem } from "../../../ui/dropdown";
 
-const ChatListItem = () => {
+interface ChatListItemProps {}
+
+const ChatListItem = (props: ChatListItemProps) => {
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
   const handleMouseEnter = (e: MouseEvent<HTMLLIElement>) => {

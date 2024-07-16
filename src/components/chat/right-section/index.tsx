@@ -26,7 +26,6 @@ const RightSection = (props: RightSectionProps) => {
         {/* title */}
         <h2 className="title">{title}</h2>
       </header>
-
       {children}
     </div>
   );
