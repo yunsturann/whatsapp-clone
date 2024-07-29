@@ -10,6 +10,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  getDoc,
   getDocs,
   query,
   serverTimestamp,
@@ -18,15 +19,22 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase";
-import toast from "react-hot-toast";
-import { IUser } from "../../../../types";
+
+// ** Types
+import { IChatList, IUser } from "../../../../types";
+
+// ** Store
 import { useUserStore } from "../../../../store/use-user-store";
+
+// ** Third Party Components
+import toast from "react-hot-toast";
 
 const NewChatSection = () => {
   const { currentUser } = useUserStore();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchedUser, setSearchedUser] = useState<IUser | null>(null);
+  const [isLoadingAddUser, setIsLoadingAddUser] = useState(false);
 
   // ** Fetch Users
   const fetchUsers = useCallback(async () => {
@@ -44,7 +52,10 @@ const NewChatSection = () => {
   }, [searchTerm]);
 
   useEffect(() => {
-    if (!searchTerm.trim()) return;
+    if (!searchTerm.trim()) {
+      setSearchedUser(null);
+      return;
+    }
 
     // debounce the search
     const timeoutId = setTimeout(() => fetchUsers(), 300);
@@ -54,11 +65,32 @@ const NewChatSection = () => {
 
   // ** Add User
   const handleAddUser = async () => {
+    if (currentUser === null || searchedUser === null)
+      return toast.error("User not found");
+
+    setIsLoadingAddUser(true);
+
     const chatRef = collection(db, "chats");
     const chatListRef = collection(db, "chatlist");
 
     try {
       const newChatRef = doc(chatRef);
+
+      // check if chat already exists
+      const currentChatListSnap = await getDoc(
+        doc(db, "chatlist", currentUser.id)
+      );
+
+      if (!currentChatListSnap.exists())
+        throw new Error("Current user chatlist not found");
+
+      const currentChatList = currentChatListSnap.data() as IChatList;
+
+      const chatExists = currentChatList.chats.some(
+        (chat) => chat.receiverId === searchedUser.id
+      );
+
+      if (chatExists) return toast.error("Chat already exists");
 
       await setDoc(newChatRef, {
         createdAt: serverTimestamp(),
@@ -67,7 +99,7 @@ const NewChatSection = () => {
 
       // update chatlist of chat user then update chatlist of current user
       await Promise.all([
-        await updateDoc(doc(chatListRef, currentUser?.id), {
+        updateDoc(doc(chatListRef, currentUser?.id), {
           chats: arrayUnion({
             chatId: newChatRef.id,
             lastMessage: "",
@@ -75,7 +107,7 @@ const NewChatSection = () => {
             updatedAt: Date.now(),
           }),
         }),
-        await updateDoc(doc(chatListRef, searchedUser?.id), {
+        updateDoc(doc(chatListRef, searchedUser?.id), {
           chats: arrayUnion({
             chatId: newChatRef.id,
             lastMessage: "",
@@ -84,8 +116,12 @@ const NewChatSection = () => {
           }),
         }),
       ]);
+
+      toast.success("User added successfully");
     } catch (error) {
       toast.error((error as Error).message);
+    } finally {
+      setIsLoadingAddUser(false);
     }
   };
 
@@ -118,10 +154,16 @@ const NewChatSection = () => {
             alt={searchedUser.username + "'s avatar" || "avatar"}
           />
           <div className="texts">
-            <h4>{searchedUser.username}</h4>
-            <p>about mee</p>
+            <h4 className="line-clamp-1">{searchedUser.username}</h4>
+            <p className="line-clamp-1">
+              about mee Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Laudantium perspiciatis assumenda sit natus eius, necessitatibus
+              porro in cumque unde nam.
+            </p>
           </div>
-          <button onClick={handleAddUser}>Add</button>
+          <button onClick={handleAddUser} disabled={isLoadingAddUser}>
+            Add
+          </button>
         </div>
       )}
     </div>

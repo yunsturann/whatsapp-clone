@@ -8,12 +8,16 @@ import { IoChevronDown } from "react-icons/io5";
 // ** Custom Components
 import Dropdown, { DropdownItem } from "../../../ui/dropdown";
 
+// ** Types
+import { IMessage } from "../../../../types";
+
 interface MessageItemProps {
+  message: IMessage;
   isOwn: boolean;
 }
 
 const MessageItem = (props: MessageItemProps) => {
-  const { isOwn } = props;
+  const { isOwn, message } = props;
 
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -36,7 +40,7 @@ const MessageItem = (props: MessageItemProps) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <p>Lorem ipsum dolor sit,</p>
+        <p>{message.text}</p>
 
         <div className="detail">
           <span>10:42 AM</span>

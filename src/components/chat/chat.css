@@ -206,6 +206,7 @@
   }
 
   .without-chat {
+    flex: 1;
     position: relative;
     background: var(--light-gray);
     height: 100%;

@@ -1,22 +1,28 @@
 // ** React Imports
 import { useState } from "react";
 
-// ** Custom Components
-import Dropdown, { DropdownItem } from "../../ui/dropdown";
-
 // ** Icons
 import { RiChatNewLine } from "react-icons/ri";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 
 // ** Firebase
 import { auth } from "../../../config/firebase";
+
+// ** Store
 import { useLeftbarOptions } from "../../../store/use-leftbar-options";
+
+// ** Custom Components
+import Dropdown, { DropdownItem } from "../../ui/dropdown";
 import NewChatSection from "../left-section/new-chat-section";
+import { useUserStore } from "../../../store/use-user-store";
 
 const Navbar = () => {
+  // ** States
   const [menuDropdown, setMenuDropdown] = useState(false);
 
+  // ** Store
   const { setOptions } = useLeftbarOptions();
+  const currentUser = useUserStore((state) => state.currentUser);
 
   const handleLogout = () => {
     auth.signOut();
@@ -35,7 +41,10 @@ const Navbar = () => {
   return (
     <div className="navbar">
       {/* avatar */}
-      <img src="/images/avatar.png" alt="" />
+      <img
+        src={currentUser?.avatar || "/images/avatar.png"}
+        alt={currentUser?.username + "'s avatar" || "user avatar"}
+      />
       {/* navigators*/}
 
       <ul>

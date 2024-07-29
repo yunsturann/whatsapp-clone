@@ -20,6 +20,10 @@ export interface IChatList {
   chats: IChatListItem[];
 }
 
+export interface IChatListData extends IChatListItem {
+  user: IUser;
+}
+
 // ** Chat Types
 export interface IMessage {
   createdAt: string;
@@ -27,7 +31,7 @@ export interface IMessage {
   text: string;
 }
 
-export interface IChats {
+export interface IChat {
   createdAt: string;
   messages: IMessage[];
 }

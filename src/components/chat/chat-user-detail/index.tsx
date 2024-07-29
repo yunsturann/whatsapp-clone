@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { memo, useEffect, useState } from "react";
 
 // ** Icons
 import { GrSearch } from "react-icons/gr";
 
 // ** Store
 import { useRightbarOptions } from "../../../store/use-rightbar-options";
+import { useChatStore } from "../../../store/use-chat-store";
 
 // ** Custom Components
 import Dropdown, { DropdownItem } from "../../ui/dropdown";
@@ -12,13 +14,14 @@ import ContactInfo from "../right-section/contact-info";
 import SearchMessages from "../right-section/search-messages";
 
 const ChatUserDetail = () => {
+  // ** States
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showContactInfo, setShowContactInfo] = useState(true);
 
-  const setIsRightbarOpen = useRightbarOptions((state) => state.setIsOpen);
-  const setRightbarProps = useRightbarOptions(
-    (state) => state.setRightSectionProps
-  );
+  // ** Stores
+  const { setIsOpen: setIsRightSectionOpen, setRightSectionProps } =
+    useRightbarOptions();
+  const { resetChat, chatUser } = useChatStore();
 
   useEffect(() => {
     const timer = setTimeout(() => setShowContactInfo(false), 3000);
@@ -27,18 +30,18 @@ const ChatUserDetail = () => {
   }, []);
 
   const handleContactInfo = () => {
-    setIsRightbarOpen(true);
+    setIsRightSectionOpen(true);
 
-    setRightbarProps({
+    setRightSectionProps({
       title: "Contact info",
       children: <ContactInfo />,
     });
   };
 
   const handleSearchMessages = () => {
-    setIsRightbarOpen(true);
+    setIsRightSectionOpen(true);
 
-    setRightbarProps({
+    setRightSectionProps({
       title: "Search messages",
       children: <SearchMessages />,
     });
@@ -48,10 +51,13 @@ const ChatUserDetail = () => {
     <div className="chat-user-detail">
       <div className="user-info" onClick={handleContactInfo}>
         {/* chat user avatar */}
-        <img src="/images/avatar.png" alt="" />
+        <img
+          src={chatUser?.avatar || "/images/avatar.png"}
+          alt={chatUser?.username + "'s avatar" || "user avatar"}
+        />
 
         <div className="username">
-          <h2>John Doe</h2>
+          <h2>{chatUser?.username}</h2>
           {showContactInfo && <p>click here for contact info</p>}
         </div>
       </div>
@@ -69,7 +75,14 @@ const ChatUserDetail = () => {
         <Dropdown isOpen={isMenuOpen} setIsOpen={setIsMenuOpen}>
           <DropdownItem onClick={handleContactInfo}>Contact info</DropdownItem>
           <DropdownItem>Select messages</DropdownItem>
-          <DropdownItem>Close chat</DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              resetChat();
+              setIsMenuOpen(false);
+            }}
+          >
+            Close chat
+          </DropdownItem>
           <DropdownItem>Mute notifications</DropdownItem>
           <DropdownItem>Clear chat</DropdownItem>
           <DropdownItem>Delete chat</DropdownItem>
@@ -81,4 +94,4 @@ const ChatUserDetail = () => {
   );
 };
 
-export default ChatUserDetail;
+export default memo(ChatUserDetail);
