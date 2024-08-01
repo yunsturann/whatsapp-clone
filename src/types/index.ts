@@ -5,6 +5,7 @@ export interface IUser {
   username: string;
   avatar: string;
   blocked: string[];
+  about?: string;
 }
 
 // ** Chat List Types

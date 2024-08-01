@@ -15,6 +15,7 @@ import { useLeftbarOptions } from "../../../store/use-leftbar-options";
 import Dropdown, { DropdownItem } from "../../ui/dropdown";
 import NewChatSection from "../left-section/new-chat-section";
 import { useUserStore } from "../../../store/use-user-store";
+import Profile from "../left-section/profile";
 
 const Navbar = () => {
   // ** States
@@ -38,12 +39,24 @@ const Navbar = () => {
     });
   };
 
+  const handleShowProfile = () => {
+    setOptions({
+      isOpen: true,
+      props: {
+        title: "Profile",
+        children: <Profile />,
+      },
+    });
+  };
+
   return (
     <div className="navbar">
       {/* avatar */}
       <img
+        className="avatar"
         src={currentUser?.avatar || "/images/avatar.png"}
         alt={currentUser?.username + "'s avatar" || "user avatar"}
+        onClick={handleShowProfile}
       />
       {/* navigators*/}
 

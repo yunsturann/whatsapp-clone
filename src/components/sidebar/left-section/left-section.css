@@ -132,5 +132,96 @@
         }
       }
     }
+
+    .profile {
+      background-color: #f0f2f5;
+      height: 100%;
+      width: 100%;
+
+      .avatar {
+        padding: 28px 0;
+        display: flex;
+        justify-content: center;
+
+        img {
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+        }
+      }
+
+      .info {
+        padding: 4px 30px 26px;
+        color: #54656f;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .editable-section {
+        background-color: #ffffff;
+        padding: 14px 30px 10px;
+        margin-bottom: 10px;
+
+        h3 {
+          font-size: 14px;
+          color: #008069;
+          margin-bottom: 20px;
+        }
+
+        .edit {
+          position: relative;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          input {
+            background-color: transparent;
+            outline: none;
+            border: none;
+            flex: 1;
+            font-size: 16px;
+            color: #3b4a54;
+            outline: none;
+            font-weight: 100;
+
+            &.editable {
+              font-size: 17px;
+            }
+          }
+
+          .action {
+            align-self: flex-start;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: gray;
+
+            p {
+              opacity: 0.5;
+              font-size: 14px;
+            }
+
+            button {
+              background-color: transparent !important;
+
+              svg {
+                width: 22px;
+                height: 22px;
+              }
+            }
+          }
+        }
+        .bottom-line {
+          width: 100%;
+          height: 2px;
+          background-color: #667781;
+          margin: 4px 0;
+
+          &.active {
+            background-color: var(--main-green);
+          }
+        }
+      }
+    }
   }
 }

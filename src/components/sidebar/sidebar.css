@@ -14,10 +14,11 @@
     background: var(--light-gray);
     border-right: 1px solid var(--border-gray);
 
-    img {
+    .avatar {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+      cursor: pointer;
     }
 
     ul {

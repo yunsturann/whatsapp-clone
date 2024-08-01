@@ -22,7 +22,10 @@ const LeftSection = () => {
 
   const handleCloseLeftSection = () => {
     setOptions({
-      ...options,
+      props: {
+        title: "",
+        children: null,
+      },
       isOpen: false,
     });
   };
