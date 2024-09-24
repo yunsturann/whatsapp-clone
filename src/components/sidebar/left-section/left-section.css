@@ -143,10 +143,50 @@
         display: flex;
         justify-content: center;
 
-        img {
-          height: 200px;
-          width: 200px;
-          border-radius: 50%;
+        label {
+          position: relative;
+          color: white;
+
+          img {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          .pp-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background: #54656fcc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+              opacity: 1;
+            }
+
+            svg {
+              width: 24px;
+              height: 24px;
+              margin-bottom: 10px;
+            }
+
+            p {
+              font-size: 13px;
+              word-spacing: 0;
+              text-align: center;
+              font-weight: 100;
+            }
+          }
         }
       }
 

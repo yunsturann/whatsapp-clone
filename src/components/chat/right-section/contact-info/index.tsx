@@ -12,21 +12,29 @@ import {
 } from "react-icons/fa";
 import { IoMdTimer } from "react-icons/io";
 
+// ** Store
+import { useChatStore } from "../../../../store/use-chat-store";
+
 const ContactInfo = () => {
+  const { chatUser } = useChatStore();
+
   return (
     <div className="contact-info">
       {/* Avatar & username*/}
       <div className="user-detail">
-        <img src="/images/avatar.png" alt="" />
+        <img
+          src={chatUser?.avatar || "/images/avatar.png"}
+          alt={chatUser?.username + " avatar" || "chat user avatar"}
+        />
 
-        <h3>John Doe</h3>
+        <h3>{chatUser?.username}</h3>
       </div>
 
       {/* About */}
-      {true && (
+      {chatUser?.about && (
         <div className="about">
           <h4>About</h4>
-          <p>Lorem ipsum dolor sit amet.</p>
+          <p>{chatUser?.about}</p>
         </div>
       )}
 
@@ -97,12 +105,12 @@ const ContactInfo = () => {
 
         <div className="item">
           <FaBan />
-          <p>Block John Doe</p>
+          <p>Block {chatUser?.username}</p>
         </div>
 
         <div className="item">
           <FaThumbsDown />
-          <p>Report John Doe</p>
+          <p>Report {chatUser?.username}</p>
         </div>
 
         <div className="item">

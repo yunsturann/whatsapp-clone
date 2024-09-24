@@ -7,6 +7,7 @@ interface UserStore {
   currentUser: IUser | null;
   isLoading: boolean;
   fetchCurrentUser: (uid: string) => void;
+  setUserProfile: (key: string, value: string) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -27,5 +28,13 @@ export const useUserStore = create<UserStore>((set) => ({
       console.log((error as Error).message);
       return set({ currentUser: null, isLoading: false });
     }
+  },
+  setUserProfile: (key: string, value: string) => {
+    set((state) => ({
+      currentUser: {
+        ...state.currentUser!,
+        [key]: value,
+      },
+    }));
   },
 }));

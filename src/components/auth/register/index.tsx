@@ -8,6 +8,9 @@ import { onInputUserName } from "../../../lib/utils";
 import { auth, db } from "../../../config/firebase";
 import uploadStorage from "../../../lib/firebase/uploadStorage";
 
+// ** Constants
+import { initialAvatar } from "../../../constants";
+
 // ** Third Party Imports
 import toast from "react-hot-toast";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -24,19 +27,11 @@ interface RegisterProps {
   setIsOnLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const initialAvatar: {
-  file: File | null;
-  url: string;
-} = {
-  file: null,
-  url: "",
-};
-
 const Register = (props: RegisterProps) => {
   const { setIsOnLogin } = props;
 
-  const [avatar, setAvatar] = useState(initialAvatar);
   const [isLoading, setIsLoading] = useState(false);
+  const [avatar, setAvatar] = useState(initialAvatar);
 
   const handleAvatar = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -52,7 +47,6 @@ const Register = (props: RegisterProps) => {
 
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const { username, email, password, confirmPassword } = Object.fromEntries(
       new FormData(e.currentTarget)
@@ -62,6 +56,8 @@ const Register = (props: RegisterProps) => {
       return toast.error("Passwords do not match");
 
     try {
+      setIsLoading(true);
+
       // validate unique username
       const userRef = collection(db, "users");
       const q = query(userRef, where("username", "==", username));
