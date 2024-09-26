@@ -36,3 +36,9 @@ export interface IChat {
   createdAt: string;
   messages: IMessage[];
 }
+
+// ** File Preview Type
+export interface IFilePreview {
+  file: File | null;
+  url: string;
+}

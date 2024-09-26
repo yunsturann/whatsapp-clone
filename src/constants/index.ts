@@ -1,7 +1,6 @@
-export const initialAvatar: {
-  file: File | null;
-  url: string;
-} = {
+import { IFilePreview } from "../types";
+
+export const initialAvatar: IFilePreview = {
   file: null,
   url: "",
 };

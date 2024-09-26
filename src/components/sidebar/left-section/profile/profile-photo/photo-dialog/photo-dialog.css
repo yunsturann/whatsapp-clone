@@ -1,0 +1,112 @@
+.photo-dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .inner {
+    background-color: rgb(233, 237, 239);
+    z-index: 1000;
+    height: 500px;
+    width: 500px;
+    box-shadow: rgba(11, 20, 26, 0.19) 0px 17px 50px 0px,
+      rgba(11, 20, 26, 0.24) 0px 12px 15px 0px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background-color: #008069;
+    color: #ffffff;
+    padding: 0 20px 0 25px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    h2 {
+      flex: 1;
+      font-size: 18px;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .close-dialog {
+      cursor: pointer;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        opacity: 0.8;
+      }
+    }
+
+    .action {
+      font-size: 14px;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  .photo-dialog-body {
+    flex: 1;
+    background-color: rgb(59, 74, 84);
+
+    img {
+      height: 360px;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .photo-dialog-footer {
+    position: relative;
+    min-height: 90px;
+
+    button {
+      position: absolute;
+      top: -30px;
+      background-color: #00a884;
+      box-shadow: rgba(11, 20, 26, 0.4) 0px 1px 3px 0px;
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &.center {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &.right {
+        right: 10%;
+      }
+
+      svg {
+        width: 30px;
+        height: 30px;
+        color: #fff;
+      }
+    }
+  }
+}
