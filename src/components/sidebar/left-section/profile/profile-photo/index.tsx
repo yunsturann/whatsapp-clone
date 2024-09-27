@@ -22,7 +22,8 @@ const ProfilePhoto = () => {
 
   // ** Stores
   const { currentUser } = useUserStore();
-  const { setShowUploadDialog, setAvatar } = useProfilePhotoDialogs();
+  const { setShowUploadDialog, setAvatar, setShowTakePhotoDialog } =
+    useProfilePhotoDialogs();
 
   const handleClickUpload = () => {
     uploadPhotoRef.current?.click();
@@ -40,6 +41,11 @@ const ProfilePhoto = () => {
     });
 
     setShowUploadDialog(true);
+  };
+
+  const handleTakePhoto = () => {
+    setShowTakePhotoDialog(true);
+    setShowDropdown(false);
   };
 
   return (
@@ -65,7 +71,7 @@ const ProfilePhoto = () => {
           </div>
         }
       >
-        <DropdownItem>Take photo</DropdownItem>
+        <DropdownItem onClick={handleTakePhoto}>Take photo</DropdownItem>
         <DropdownItem onClick={handleClickUpload}>Upload photo</DropdownItem>
       </Dropdown>
 

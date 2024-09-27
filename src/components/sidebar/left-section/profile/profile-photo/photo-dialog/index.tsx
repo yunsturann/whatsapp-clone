@@ -14,7 +14,7 @@ interface PhotoDialogProps {
     };
   };
   children: React.ReactNode;
-  footerChildren: React.ReactNode;
+  footerChildren?: React.ReactNode;
 }
 
 const PhotoDialog = (props: PhotoDialogProps) => {

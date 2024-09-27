@@ -11,7 +11,9 @@ import {
 
 // ** Icons
 import { FaEllipsisVertical } from "react-icons/fa6";
-import useClickOutside from "../../../hooks/shared/use-click-outside";
+
+// ** Hooks
+import useClickOutside from "../../../hooks/use-click-outside";
 
 interface DropdownProps {
   isOpen: boolean;

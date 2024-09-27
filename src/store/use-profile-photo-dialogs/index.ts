@@ -7,6 +7,8 @@ interface ProfilePhotoDialogsStore {
   setAvatar: (file: IFilePreview) => void;
   showUploadDialog: boolean;
   setShowUploadDialog: (by?: boolean) => void;
+  showTakePhotoDialog: boolean;
+  setShowTakePhotoDialog: (by: boolean) => void;
 }
 
 export const useProfilePhotoDialogs = create<ProfilePhotoDialogsStore>(
@@ -25,6 +27,10 @@ export const useProfilePhotoDialogs = create<ProfilePhotoDialogsStore>(
           showUploadDialog: !state.showUploadDialog,
         }));
       }
+    },
+    showTakePhotoDialog: false,
+    setShowTakePhotoDialog: (by) => {
+      set({ showTakePhotoDialog: by });
     },
   })
 );

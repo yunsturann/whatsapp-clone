@@ -8,14 +8,15 @@ import { useUserStore } from "../../../store/use-user-store";
 // ** Third Party Imports
 import toast from "react-hot-toast";
 
-// ** Custom Components
-import PhotoDialog from "../left-section/profile/profile-photo/photo-dialog";
-
 // ** Icons
 import { MdCheck } from "react-icons/md";
 
 // ** Utils
 import uploadStorage from "../../../lib/firebase/uploadStorage";
+
+// ** Custom Components
+import PhotoDialog from "../left-section/profile/profile-photo/photo-dialog";
+import TakePhotoDialog from "./take-photo-dialog";
 
 const PhotoDialogs = () => {
   // ** States
@@ -25,8 +26,13 @@ const PhotoDialogs = () => {
   const uploadPhotoRef = useRef<HTMLInputElement>(null);
 
   // ** Stores
-  const { setShowUploadDialog, showUploadDialog, avatar, setAvatar } =
-    useProfilePhotoDialogs();
+  const {
+    setShowUploadDialog,
+    showUploadDialog,
+    avatar,
+    setAvatar,
+    showTakePhotoDialog,
+  } = useProfilePhotoDialogs();
   const { changeUserProfileInfo } = useUserStore();
 
   const handleClickUpload = () => {
@@ -88,6 +94,8 @@ const PhotoDialogs = () => {
           <img src={avatar.url} alt="Selected Photo" />
         </PhotoDialog>
       )}
+
+      {showTakePhotoDialog && <TakePhotoDialog />}
 
       <input
         ref={uploadPhotoRef}
