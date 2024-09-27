@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 // ** Store
 import { useProfilePhotoDialogs } from "../../../store/use-profile-photo-dialogs";
@@ -18,12 +18,34 @@ import { MdCheck } from "react-icons/md";
 import uploadStorage from "../../../lib/firebase/uploadStorage";
 
 const PhotoDialogs = () => {
+  // ** States
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { setShowUploadDialog, showUploadDialog, avatar } =
-    useProfilePhotoDialogs();
+  // ** Refs
+  const uploadPhotoRef = useRef<HTMLInputElement>(null);
 
+  // ** Stores
+  const { setShowUploadDialog, showUploadDialog, avatar, setAvatar } =
+    useProfilePhotoDialogs();
   const { changeUserProfileInfo } = useUserStore();
+
+  const handleClickUpload = () => {
+    uploadPhotoRef.current?.click();
+  };
+
+  const handleSelectAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    if (!e.target.files[0].type.includes("image"))
+      return toast.error("File is not an image");
+
+    setAvatar({
+      file: e.target.files[0],
+      url: URL.createObjectURL(e.target.files[0]),
+    });
+
+    setShowUploadDialog(true);
+  };
 
   const handleSaveUploadedPhoto = async () => {
     if (!avatar.file) {
@@ -51,7 +73,7 @@ const PhotoDialogs = () => {
           onClose={() => setShowUploadDialog(false)}
           header={{
             title: "Drag the image to adjust",
-            action: { text: "Upload", handleAction: () => {} },
+            action: { text: "Upload", handleAction: handleClickUpload },
           }}
           footerChildren={
             <button
@@ -66,6 +88,14 @@ const PhotoDialogs = () => {
           <img src={avatar.url} alt="Selected Photo" />
         </PhotoDialog>
       )}
+
+      <input
+        ref={uploadPhotoRef}
+        type="file"
+        style={{ display: "none" }}
+        onChange={handleSelectAvatar}
+        accept="image/*"
+      />
     </>
   );
 };

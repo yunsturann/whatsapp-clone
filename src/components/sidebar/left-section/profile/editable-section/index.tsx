@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 // ** Icons
@@ -39,6 +39,12 @@ const EditableSection = (props: EditableSectionProps) => {
     bottomLineRef.current?.classList.add("active");
   };
 
+  const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAction();
+    }
+  };
+
   const handleAction = async () => {
     // if not editing, start editing
     if (!isEditing) {
@@ -76,6 +82,7 @@ const EditableSection = (props: EditableSectionProps) => {
           onFocus={handleFocus}
           maxLength={maxLength}
           disabled={!isEditing}
+          onKeyDown={handleKeydown}
         />
 
         {/* actions */}
