@@ -11,23 +11,28 @@ import toast from "react-hot-toast";
 
 // ** Icons
 import { BsEmojiSmile } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 
+// ** Types
+import { IChatList } from "../../../types";
+
 // ** Store
 import { useChatStore } from "../../../store/use-chat-store";
+import { useUserStore } from "../../../store/use-user-store";
 
 // ** Firebase
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { useUserStore } from "../../../store/use-user-store";
-import { IChatList } from "../../../types";
+
+// ** Custom Components
+import AttachDropdown from "./attach-dropdown";
 
 const CreateText = () => {
   // ** States
   const [text, setText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   // ** Stores
   const currentUser = useUserStore((state) => state.currentUser);
@@ -45,6 +50,7 @@ const CreateText = () => {
       return toast.error("Chat not found. Please try again");
 
     try {
+      setIsSending(true);
       // ** Update the chat
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
@@ -85,6 +91,8 @@ const CreateText = () => {
       setText("");
     } catch (error) {
       toast.error((error as Error).message);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -119,9 +127,8 @@ const CreateText = () => {
         </div>
       </div>
 
-      <div className="icon">
-        <FaPlus />
-      </div>
+      {/* Attach */}
+      <AttachDropdown />
 
       {/* input area */}
 
@@ -131,9 +138,15 @@ const CreateText = () => {
           value={text}
           onChange={({ target }) => setText(target.value)}
           placeholder="Type a message"
+          disabled={isSending}
         />
 
-        <button type="submit" className="icon" aria-label="Send Message">
+        <button
+          type="submit"
+          className="icon"
+          aria-label="Send Message"
+          disabled={isSending}
+        >
           <IoSend />
         </button>
       </form>
