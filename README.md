@@ -1,8 +1,7 @@
 # Whatsapp Web Clone
 
-- This is a clone of the Whatsapp Web interface to practice my web development skills.
-- The project is built using React, Firebase, and nested-css.
-- Frontend focused full-stack project.
+- This is a clone of the Whatsapp Web to practice my web development skills.
+- Frontend focused full-stack project by using React, Firebase, and nested-css.
 
 ### accept
 

@@ -1,0 +1,48 @@
+.chat-user-detail {
+  background: var(--light-gray);
+  height: 60px;
+  width: 100%;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  .user-info {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+
+    img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .username {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        font-size: 16px;
+        color: #111b21;
+        font-style: normal;
+        font-weight: normal;
+      }
+
+      p {
+        font-size: 13px;
+        color: #667781;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

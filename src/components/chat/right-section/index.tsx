@@ -1,3 +1,6 @@
+import "./right-section.css";
+
+// ** React Imports
 import { ReactNode } from "react";
 
 // ** Icons

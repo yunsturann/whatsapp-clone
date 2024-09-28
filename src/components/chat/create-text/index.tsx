@@ -1,5 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
+import "./create-text.css";
+
 // ** React Imports
 import { FormEvent, memo, useState } from "react";
 

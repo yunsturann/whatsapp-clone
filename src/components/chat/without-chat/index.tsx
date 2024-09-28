@@ -1,3 +1,5 @@
+import "./without-chat.css";
+
 // ** Icons
 import { FaLock } from "react-icons/fa";
 

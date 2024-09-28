@@ -1,5 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 
+import "./chat-content.css";
+
 // ** React Imports
 import { memo, useEffect, useRef, useState } from "react";
 

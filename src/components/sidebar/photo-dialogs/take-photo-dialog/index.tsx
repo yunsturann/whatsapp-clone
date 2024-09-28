@@ -10,13 +10,15 @@ import { useProfilePhotoDialogs } from "../../../../store/use-profile-photo-dial
 import { useUserStore } from "../../../../store/use-user-store";
 
 // ** Custom Components
-import PhotoDialog from "../../left-section/profile/profile-photo/photo-dialog";
+import PhotoDialog from "../photo-dialog";
 
 // ** Hooks
 import useCamera from "../../../../hooks/use-camera";
 
 // ** Third Party Imports
 import toast from "react-hot-toast";
+
+// ** Utils
 import { base64ToFile } from "../../../../lib/utils";
 import uploadStorage from "../../../../lib/firebase/uploadStorage";
 

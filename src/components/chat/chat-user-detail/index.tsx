@@ -1,4 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
+
+import "./chat-user-detail.css";
+
 import { memo, useEffect, useState } from "react";
 
 // ** Icons

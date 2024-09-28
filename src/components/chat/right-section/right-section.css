@@ -1,0 +1,35 @@
+.chat-section .right-section {
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 60px;
+    padding: 10px 20px 10px 25px;
+    background: var(--light-gray);
+    border-left: 1px solid var(--border-gray);
+
+    .close-icon {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      svg {
+        color: #54656f;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      line-height: normal;
+    }
+  }
+}

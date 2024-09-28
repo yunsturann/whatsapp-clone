@@ -1,3 +1,5 @@
+import "./chat-list.css";
+
 // ** React Imports
 import { useEffect, useState } from "react";
 

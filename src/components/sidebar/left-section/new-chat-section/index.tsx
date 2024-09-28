@@ -155,11 +155,7 @@ const NewChatSection = () => {
           />
           <div className="texts">
             <h4 className="line-clamp-1">{searchedUser.username}</h4>
-            <p className="line-clamp-1">
-              about mee Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Laudantium perspiciatis assumenda sit natus eius, necessitatibus
-              porro in cumque unde nam.
-            </p>
+            <p className="line-clamp-1">{searchedUser.about}</p>
           </div>
           <button onClick={handleAddUser} disabled={isLoadingAddUser}>
             Add

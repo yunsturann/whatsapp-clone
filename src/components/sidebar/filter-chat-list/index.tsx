@@ -1,3 +1,5 @@
+import "./filter-chat-list.css";
+
 // ** React Imports
 import { MouseEvent, useState } from "react";
 
@@ -10,9 +12,9 @@ const FilterChatList = () => {
   const [placeholder, setPlaceholder] = useState("Search");
 
   const handleSelectChip = (e: MouseEvent<HTMLDivElement>) => {
-    const chipBoxes = document.querySelectorAll(".chip-boxes .box");
+    const chipBox = document.querySelector(".chip-boxes .box.active");
 
-    chipBoxes.forEach((box) => box.classList.remove("active"));
+    chipBox?.classList.remove("active");
 
     e.currentTarget.classList.add("active");
 

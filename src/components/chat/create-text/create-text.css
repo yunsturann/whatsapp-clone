@@ -1,0 +1,62 @@
+.create-text {
+  padding: 9px 16px;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #63737c;
+
+  .emoji-picker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .picker {
+      position: absolute;
+      bottom: 100%;
+      margin-bottom: 20px;
+      left: 10px;
+
+      .EmojiPickerReact {
+        z-index: 999;
+      }
+    }
+  }
+
+  .icon {
+    padding: 8px;
+    cursor: pointer;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    input {
+      flex: 1;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      padding: 12px;
+      font-size: 15px;
+    }
+
+    button {
+      outline: none;
+      border: none;
+      color: #63737c;
+      transition: all 0.3s;
+
+      &:hover {
+        color: #546269;
+      }
+    }
+  }
+}
