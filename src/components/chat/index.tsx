@@ -10,6 +10,7 @@ import ChatUserDetail from "./chat-user-detail";
 import CreateText from "./create-text";
 import WithoutChat from "./without-chat";
 import RightSection from "./right-section";
+import UploadFileDialog from "./upload-file-dialog";
 
 const Chat = () => {
   const chatId = useChatStore((state) => state.chatId);
@@ -30,6 +31,7 @@ const Chat = () => {
         <WithoutChat />
       )}
       {rightIsOpen && <RightSection {...rightSectionProps} />}
+      {true && <UploadFileDialog />}
     </div>
   );
 };

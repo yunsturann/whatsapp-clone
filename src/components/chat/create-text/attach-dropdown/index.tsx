@@ -5,11 +5,13 @@ import { useRef } from "react";
 // ** Icons
 import { FaPhotoVideo } from "react-icons/fa";
 import { FaCamera, FaPlus } from "react-icons/fa6";
+import useClickOutside from "../../../../hooks/use-click-outside";
 
 const AttachDropdown = () => {
   // ** Refs
   const attachIconRef = useRef<HTMLSpanElement>(null);
   const attachDropdownRef = useRef<HTMLUListElement>(null);
+  const attachContainer = useRef<HTMLDivElement>(null);
 
   const handleClickAttach = () => {
     attachIconRef.current?.classList.toggle("active");
@@ -17,8 +19,14 @@ const AttachDropdown = () => {
     attachDropdownRef.current?.classList.toggle("close");
   };
 
+  useClickOutside(attachContainer, () => {
+    if (attachDropdownRef.current?.classList.contains("open")) {
+      handleClickAttach();
+    }
+  });
+
   return (
-    <div className="attach-dropdown-container">
+    <div ref={attachContainer} className="attach-dropdown-container">
       <span
         ref={attachIconRef}
         className="action-icon"

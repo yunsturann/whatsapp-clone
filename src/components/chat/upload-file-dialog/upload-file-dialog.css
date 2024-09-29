@@ -1,0 +1,213 @@
+.upload-file-dialog {
+  position: absolute;
+  inset: 0;
+  margin-top: 60px;
+  background-color: rgb(233, 237, 239);
+  display: flex;
+  flex-direction: column;
+
+  .settings {
+    position: relative;
+    height: 72px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      opacity: 0.6;
+    }
+
+    .close-icon {
+      position: absolute;
+      left: 24px;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      li {
+        padding: 8px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 480px;
+      max-height: 586px;
+      object-fit: contain;
+      user-select: none;
+    }
+  }
+
+  .caption-container {
+    padding: 8px;
+
+    .caption {
+      background-color: white;
+      border-radius: 8px;
+      padding: 4px 16px;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 650px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      input {
+        flex: 1;
+        height: 100%;
+        outline: none;
+        border: none;
+        color: rgb(59, 74, 84);
+        font-size: 17px;
+        padding-left: 8px;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        span {
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        svg {
+          height: 20px;
+          width: 20px;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .files-and-submit {
+    margin: 8px 16px;
+    display: flex;
+    align-items: center;
+
+    .files {
+      flex: 1;
+      display: flex;
+      margin: 4px 16px 0;
+      overflow: auto;
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      overflow: auto;
+
+      li {
+        position: relative;
+        flex-shrink: 0;
+        margin: 6px 3px 8px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 3px solid transparent;
+        width: 58px;
+        height: 58px;
+        user-select: none;
+
+        &.active {
+          border-color: #00a884;
+        }
+
+        &:not(.active) img {
+          border-radius: 5px;
+        }
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    label[for="add-file-button"] {
+      height: 52px;
+      width: 52px;
+      border-radius: 5px;
+      border: 1px solid rgb(209, 215, 219);
+      color: rgb(84, 101, 111);
+      margin: 9px 5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    button {
+      position: relative;
+      flex-shrink: 0;
+      background-color: rgb(0, 168, 132);
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        margin-left: 4px;
+        width: 24px;
+        height: 24px;
+      }
+
+      span {
+        position: absolute;
+        top: 0px;
+        right: -4px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #fff;
+        border-bottom: 1px solid rgb(36, 53, 69);
+        color: rgb(36, 53, 69);
+        font-size: 16px;
+        font-weight: 100;
+        padding-bottom: 1px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+    }
+  }
+
+  /* Scrool Bar */
+  ::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+  }
+}

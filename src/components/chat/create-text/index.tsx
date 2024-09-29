@@ -130,7 +130,7 @@ const CreateText = () => {
       {/* Attach */}
       <AttachDropdown />
 
-      {/* input area */}
+      {/* Input area */}
 
       <form onSubmit={handleSendMessage}>
         <input
@@ -150,8 +150,6 @@ const CreateText = () => {
           <IoSend />
         </button>
       </form>
-
-      {/* send and mic icon */}
     </div>
   );
 };

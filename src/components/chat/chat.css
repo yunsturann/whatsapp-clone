@@ -1,6 +1,7 @@
 .chat-section {
   flex: 1;
   display: flex;
+  position: relative;
 
   .with-chat {
     flex: 1;
