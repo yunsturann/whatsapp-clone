@@ -143,6 +143,41 @@
           width: 100%;
           object-fit: cover;
         }
+
+        span {
+          z-index: 10;
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          right: 0;
+          transition: opacity 0.3s;
+
+          svg {
+            color: white;
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        &::before {
+          opacity: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 40%;
+          content: "";
+          background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.2),
+            transparent
+          );
+          transition: opacity 0.3s;
+        }
+
+        &:hover span,
+        &:hover::before {
+          opacity: 1;
+        }
       }
     }
 

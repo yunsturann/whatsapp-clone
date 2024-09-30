@@ -3,6 +3,7 @@ import "./chat.css";
 // ** Store
 import { useRightbarOptions } from "../../store/use-rightbar-options";
 import { useChatStore } from "../../store/use-chat-store";
+import { useFileDialog } from "../../store/use-file-dialog";
 
 // ** Custom Components
 import ChatContent from "./chat-content";
@@ -14,10 +15,8 @@ import UploadFileDialog from "./upload-file-dialog";
 
 const Chat = () => {
   const chatId = useChatStore((state) => state.chatId);
-  const rightIsOpen = useRightbarOptions((state) => state.isOpen);
-  const rightSectionProps = useRightbarOptions(
-    (state) => state.rightSectionProps
-  );
+  const { isOpen: rightIsOpen, rightSectionProps } = useRightbarOptions();
+  const { selectedFiles } = useFileDialog();
 
   return (
     <div className="chat-section">
@@ -31,7 +30,7 @@ const Chat = () => {
         <WithoutChat />
       )}
       {rightIsOpen && <RightSection {...rightSectionProps} />}
-      {true && <UploadFileDialog />}
+      {selectedFiles.length > 0 && <UploadFileDialog />}
     </div>
   );
 };

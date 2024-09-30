@@ -1,5 +1,4 @@
 import "./upload-file-dialog.css";
-// ** React Imports
 
 // ** Constants
 import { uploadFileDialogSettings } from "../../../constants";
@@ -10,13 +9,63 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { FaPlus } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
 
+// ** Store
+import { useFileDialog } from "../../../store/use-file-dialog";
+
 const UploadFileDialog = () => {
+  const {
+    selectedFiles,
+    setSelectedFiles,
+    activeIndex,
+    setActiveIndex,
+    removeSelectedFile,
+  } = useFileDialog();
+
+  const onClose = () => {
+    setSelectedFiles([]);
+  };
+
+  const handleSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (!files || files.length === 0) return;
+
+    const additionalSelectedFiles = Array.from(files).map((file) => {
+      const url = URL.createObjectURL(file);
+      // let preview = url;
+
+      // if (file.type.startsWith("text/")) {
+      //   const reader = new FileReader();
+      //   reader.onload = (event) => {
+      //     preview = event.target?.result as string;
+      //     setSelectedFiles((prevFiles) =>
+      //       prevFiles.map((f) => (f.file === file ? { ...f, preview } : f))
+      //     );
+      //   };
+      //   reader.readAsText(file);
+      // }
+
+      return {
+        file,
+        url,
+        // preview,
+      };
+    });
+
+    setSelectedFiles([...selectedFiles, ...additionalSelectedFiles]);
+  };
+
   return (
     <div className="upload-file-dialog">
       {/* settings */}
       <div className="settings">
         {/* Close Icon */}
-        <span className="close-icon">
+        <span
+          aria-label="Close file dialog"
+          title="Close file dialog"
+          className="close-icon"
+          onClick={onClose}
+        >
           <MdClose />
         </span>
 
@@ -33,8 +82,8 @@ const UploadFileDialog = () => {
       {/* Selected File */}
       <div className="content">
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/whatsapp-web-b3525.appspot.com/o/avatars%2FFri%20Sep%2027%202024%2010%3A33%3A42%20GMT%2B0300%20(GMT%2B03%3A00)me1.jpg?alt=media&token=6f527645-d909-4622-95ae-595919e68005"
-          alt="Selected File"
+          src={selectedFiles[activeIndex].url}
+          alt={selectedFiles[activeIndex].file?.name}
         />
       </div>
 
@@ -61,24 +110,33 @@ const UploadFileDialog = () => {
         <div className="files">
           {/* selected files */}
           <ul>
-            <li className="active">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/whatsapp-web-b3525.appspot.com/o/avatars%2FFri%20Sep%2027%202024%2010%3A33%3A42%20GMT%2B0300%20(GMT%2B03%3A00)me1.jpg?alt=media&token=6f527645-d909-4622-95ae-595919e68005"
-                alt="Selected File"
-                className="active"
-              />
-              {/* delete icon */}
-            </li>
+            {selectedFiles.map((file, index) => {
+              const isActive = activeIndex === index;
 
-            {Array.from({ length: 25 }).map((_) => (
-              <li>
-                <img
-                  src="https://firebasestorage.googleapis.com/v0/b/whatsapp-web-b3525.appspot.com/o/avatars%2FFri%20Sep%2027%202024%2010%3A33%3A42%20GMT%2B0300%20(GMT%2B03%3A00)me1.jpg?alt=media&token=6f527645-d909-4622-95ae-595919e68005"
-                  alt="Selected File"
-                />
-                {/* delete icon */}
-              </li>
-            ))}
+              return (
+                <li
+                  key={file.url}
+                  className={isActive ? "active" : ""}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <img
+                    src={file.url}
+                    alt={file.file?.name}
+                    className={isActive ? "active" : ""}
+                  />
+
+                  {/* delete icon */}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeSelectedFile(index);
+                    }}
+                  >
+                    <MdClose />
+                  </span>
+                </li>
+              );
+            })}
           </ul>
 
           {/* add file button */}
@@ -93,6 +151,8 @@ const UploadFileDialog = () => {
               type="file"
               id="add-file-button"
               style={{ display: "none" }}
+              multiple
+              onChange={handleSelectFiles}
             />
           </label>
         </div>
