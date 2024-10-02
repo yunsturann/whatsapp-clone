@@ -1,5 +1,8 @@
 import "./upload-file-dialog.css";
 
+// ** React Imports
+import { useRef, useState } from "react";
+
 // ** Constants
 import { uploadFileDialogSettings } from "../../../constants";
 
@@ -12,17 +15,32 @@ import { IoSend } from "react-icons/io5";
 // ** Store
 import { useFileDialog } from "../../../store/use-file-dialog";
 
+// ** Third Party Imports
+import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+
 const UploadFileDialog = () => {
+  // ** States
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+
+  // ** Refs
+  const emojiPickerRef = useRef<HTMLDivElement>(null);
+
+  // ** Stores
   const {
     selectedFiles,
     setSelectedFiles,
     activeIndex,
     setActiveIndex,
     removeSelectedFile,
+    setCaption,
+    closeFileDialog,
   } = useFileDialog();
 
-  const onClose = () => {
-    setSelectedFiles([]);
+  // ** Variables
+  const captionText = selectedFiles[activeIndex].caption || "";
+
+  const handleSelectedEmoji = (e: EmojiClickData) => {
+    setCaption(captionText + e.emoji);
   };
 
   const handleSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,30 +48,16 @@ const UploadFileDialog = () => {
 
     if (!files || files.length === 0) return;
 
-    const additionalSelectedFiles = Array.from(files).map((file) => {
-      const url = URL.createObjectURL(file);
-      // let preview = url;
-
-      // if (file.type.startsWith("text/")) {
-      //   const reader = new FileReader();
-      //   reader.onload = (event) => {
-      //     preview = event.target?.result as string;
-      //     setSelectedFiles((prevFiles) =>
-      //       prevFiles.map((f) => (f.file === file ? { ...f, preview } : f))
-      //     );
-      //   };
-      //   reader.readAsText(file);
-      // }
-
-      return {
-        file,
-        url,
-        // preview,
-      };
-    });
+    const additionalSelectedFiles = Array.from(files).map((file) => ({
+      // ** TODO: Add another files preview
+      file,
+      url: URL.createObjectURL(file),
+    }));
 
     setSelectedFiles([...selectedFiles, ...additionalSelectedFiles]);
   };
+
+  console.log(selectedFiles);
 
   return (
     <div className="upload-file-dialog">
@@ -64,7 +68,7 @@ const UploadFileDialog = () => {
           aria-label="Close file dialog"
           title="Close file dialog"
           className="close-icon"
-          onClick={onClose}
+          onClick={closeFileDialog}
         >
           <MdClose />
         </span>
@@ -91,16 +95,42 @@ const UploadFileDialog = () => {
       <div className="caption-container">
         {/* caption */}
         <div className="caption">
-          <input type="text" placeholder="Add a caption" />
+          <input
+            type="text"
+            placeholder="Add a caption"
+            value={captionText}
+            onChange={(e) => setCaption(e.target.value)}
+          />
 
           <div className="actions">
-            <span aria-label="Clear caption" title="Clear caption">
-              <MdClose />
-            </span>
+            {/* clear caption icon */}
+            {captionText ? (
+              <span
+                aria-label="Clear caption"
+                title="Clear caption"
+                onClick={() => setCaption("")}
+              >
+                <MdClose />
+              </span>
+            ) : null}
 
-            <span aria-label="Open emojis panel" title="Open emojis panel">
+            {/* add emojis */}
+
+            {/* TODO: USE CLICK OUTSIDE */}
+            <span
+              aria-label="Open emojis panel"
+              title="Open emojis panel"
+              onClick={() => setShowEmojiPicker((prev) => !prev)}
+            >
               <BsEmojiSmile />
             </span>
+
+            <div ref={emojiPickerRef} className="emoji-picker">
+              <EmojiPicker
+                open={showEmojiPicker}
+                onEmojiClick={handleSelectedEmoji}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -153,6 +183,7 @@ const UploadFileDialog = () => {
               style={{ display: "none" }}
               multiple
               onChange={handleSelectFiles}
+              accept="image/*"
             />
           </label>
         </div>
@@ -162,7 +193,7 @@ const UploadFileDialog = () => {
         <button aria-label="Send files" title="Send files">
           <IoSend />
 
-          <span>12</span>
+          <span>{selectedFiles.length}</span>
         </button>
       </div>
     </div>

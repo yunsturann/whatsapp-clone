@@ -1,12 +1,18 @@
 import { create } from "zustand";
 import { IFilePreview } from "../../types";
 
+interface ISelectedFile extends IFilePreview {
+  caption?: string;
+}
+
 interface FileDialogStore {
-  selectedFiles: IFilePreview[];
-  setSelectedFiles: (files: IFilePreview[]) => void;
+  selectedFiles: ISelectedFile[];
+  setSelectedFiles: (files: ISelectedFile[]) => void;
   activeIndex: number;
   setActiveIndex: (url: number) => void;
   removeSelectedFile: (index: number) => void;
+  closeFileDialog: () => void;
+  setCaption: (text: string) => void;
 }
 
 export const useFileDialog = create<FileDialogStore>((set, get) => ({
@@ -30,5 +36,18 @@ export const useFileDialog = create<FileDialogStore>((set, get) => ({
     const filteredFiles = get().selectedFiles.filter((_, i) => index !== i);
 
     set({ selectedFiles: filteredFiles });
+  },
+  closeFileDialog: () => {
+    set({ selectedFiles: [], activeIndex: 0 });
+  },
+  setCaption: (text: string) => {
+    //! TODO: might add index validation but I think not required
+    const activeIndex = get().activeIndex;
+
+    const updatedFiles = get().selectedFiles;
+
+    updatedFiles[activeIndex].caption = text;
+
+    set({ selectedFiles: updatedFiles });
   },
 }));
