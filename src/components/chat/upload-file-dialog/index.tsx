@@ -17,11 +17,18 @@ import { useFileDialog } from "../../../store/use-file-dialog";
 
 // ** Third Party Imports
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+
+// ** Hooks
 import useClickOutside from "../../../hooks/use-click-outside";
+import uploadStorage from "../../../lib/firebase/uploadStorage";
+import { useChatStore } from "../../../store/use-chat-store";
+import { useCreateMessage } from "../../../store/use-create-message";
+import toast from "react-hot-toast";
 
 const UploadFileDialog = () => {
   // ** States
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ** Refs
   const emojiPickerWrapperRef = useRef<HTMLDivElement>(null);
@@ -36,6 +43,8 @@ const UploadFileDialog = () => {
     setCaption,
     closeFileDialog,
   } = useFileDialog();
+  const chatId = useChatStore((state) => state.chatId);
+  const { sendMessage } = useCreateMessage();
 
   // ** Hooks
   useClickOutside(emojiPickerWrapperRef, () => onCloseEmojiPicker());
@@ -65,7 +74,24 @@ const UploadFileDialog = () => {
     setSelectedFiles([...selectedFiles, ...additionalSelectedFiles]);
   };
 
-  console.log(selectedFiles);
+  const handleSubmitFiles = async () => {
+    try {
+      setIsSubmitting(true);
+      const promises = selectedFiles.map(async (file) => {
+        const imgUrl = await uploadStorage(file.file!, `files/${chatId}`);
+
+        await sendMessage(file.caption || "", imgUrl);
+      });
+
+      await Promise.all(promises);
+
+      closeFileDialog();
+    } catch (error) {
+      toast.error((error as Error).message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="upload-file-dialog">
@@ -200,7 +226,12 @@ const UploadFileDialog = () => {
 
         {/* send */}
 
-        <button aria-label="Send files" title="Send files">
+        <button
+          aria-label="Send files"
+          title="Send files"
+          disabled={isSubmitting}
+          onClick={handleSubmitFiles}
+        >
           <IoSend />
 
           <span>{selectedFiles.length}</span>

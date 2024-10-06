@@ -27,6 +27,10 @@
         margin-left: auto;
       }
 
+      img {
+        max-width: 240px;
+      }
+
       .detail {
         display: flex;
         align-items: flex-end;

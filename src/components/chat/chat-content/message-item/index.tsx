@@ -40,6 +40,7 @@ const MessageItem = (props: MessageItemProps) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        {message.img && <img src={message.img} alt="Message file" />}
         <p>{message.text}</p>
 
         <div className="detail">

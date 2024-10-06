@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import "./create-text.css";
+import "./create-message.css";
 
 // ** React Imports
 import { FormEvent, memo, useState } from "react";
@@ -14,29 +14,18 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 
-// ** Types
-import { IChatList } from "../../../types";
-
 // ** Store
-import { useChatStore } from "../../../store/use-chat-store";
-import { useUserStore } from "../../../store/use-user-store";
-
-// ** Firebase
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
-import { db } from "../../../config/firebase";
+import { useCreateMessage } from "../../../store/use-create-message";
 
 // ** Custom Components
 import AttachDropdown from "./attach-dropdown";
 
-const CreateText = () => {
+const CreateMessage = () => {
   // ** States
-  const [text, setText] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [isSending, setIsSending] = useState(false);
 
   // ** Stores
-  const currentUser = useUserStore((state) => state.currentUser);
-  const { chatId, chatUser } = useChatStore();
+  const { text, setText, isSubmitting, sendMessage } = useCreateMessage();
 
   const handleSelectedEmoji = (e: EmojiClickData) => {
     setText((prev) => prev + e.emoji);
@@ -46,58 +35,12 @@ const CreateText = () => {
     e.preventDefault();
 
     if (!text.trim()) return toast.error("Please enter a message");
-    if (!chatUser || !chatId || !currentUser)
-      return toast.error("Chat not found. Please try again");
 
-    try {
-      setIsSending(true);
-      // ** Update the chat
-      await updateDoc(doc(db, "chats", chatId), {
-        messages: arrayUnion({
-          text,
-          senderId: currentUser.id,
-          createdAt: new Date(),
-          //! TODO: Add the img if exists
-        }),
-      });
-
-      // ** Update users' chat list
-
-      const userIDS = [currentUser.id, chatUser.id];
-
-      userIDS.forEach(async (id) => {
-        const chatlistRef = doc(db, "chatlist", id);
-
-        const chatlistSnap = await getDoc(chatlistRef);
-
-        if (!chatlistSnap.exists()) return;
-
-        const chatlistData = chatlistSnap.data() as IChatList;
-
-        const chatIndex = chatlistData.chats.findIndex(
-          (chat) => chat.chatId === chatId
-        );
-
-        chatlistData.chats[chatIndex].lastMessage = text;
-        chatlistData.chats[chatIndex].updatedAt = Date.now();
-        chatlistData.chats[chatIndex].isSeen = id === currentUser.id;
-
-        await updateDoc(chatlistRef, {
-          chats: chatlistData.chats,
-        });
-      });
-
-      // ** Reset the text
-      setText("");
-    } catch (error) {
-      toast.error((error as Error).message);
-    } finally {
-      setIsSending(false);
-    }
+    sendMessage(text);
   };
 
   return (
-    <div className="create-text">
+    <div className="create-message">
       {/* icons emoji & attach */}
 
       <div className="emoji-picker-wrapper">
@@ -138,14 +81,14 @@ const CreateText = () => {
           value={text}
           onChange={({ target }) => setText(target.value)}
           placeholder="Type a message"
-          disabled={isSending}
+          disabled={isSubmitting}
         />
 
         <button
           type="submit"
           className="icon"
           aria-label="Send Message"
-          disabled={isSending}
+          disabled={isSubmitting}
         >
           <IoSend />
         </button>
@@ -154,4 +97,4 @@ const CreateText = () => {
   );
 };
 
-export default memo(CreateText);
+export default memo(CreateMessage);

@@ -8,7 +8,7 @@ import { useFileDialog } from "../../store/use-file-dialog";
 // ** Custom Components
 import ChatContent from "./chat-content";
 import ChatUserDetail from "./chat-user-detail";
-import CreateText from "./create-text";
+import CreateMessage from "./create-message";
 import WithoutChat from "./without-chat";
 import RightSection from "./right-section";
 import UploadFileDialog from "./upload-file-dialog";
@@ -24,7 +24,7 @@ const Chat = () => {
         <div className="with-chat">
           <ChatUserDetail />
           <ChatContent />
-          <CreateText />
+          <CreateMessage />
         </div>
       ) : (
         <WithoutChat />

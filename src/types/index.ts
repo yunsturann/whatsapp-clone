@@ -30,6 +30,7 @@ export interface IMessage {
   createdAt: string;
   senderId: string;
   text: string;
+  img?: string;
 }
 
 export interface IChat {

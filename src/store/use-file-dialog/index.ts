@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { IFilePreview } from "../../types";
+import { useCreateMessage } from "../use-create-message";
 
 interface ISelectedFile extends IFilePreview {
   caption?: string;
@@ -17,13 +18,21 @@ interface FileDialogStore {
 
 export const useFileDialog = create<FileDialogStore>((set, get) => ({
   selectedFiles: [],
+
   setSelectedFiles: (files) => {
+    const firstCaption = useCreateMessage.getState().text;
+
+    files[0].caption = firstCaption;
+
     set({ selectedFiles: files });
   },
+
   activeIndex: 0,
+
   setActiveIndex: (number) => {
     set({ activeIndex: number });
   },
+
   removeSelectedFile: (index) => {
     // ** check activeIndex is valid
     const activeIndex = get().activeIndex;
@@ -37,9 +46,11 @@ export const useFileDialog = create<FileDialogStore>((set, get) => ({
 
     set({ selectedFiles: filteredFiles });
   },
+
   closeFileDialog: () => {
     set({ selectedFiles: [], activeIndex: 0 });
   },
+
   setCaption: (text: string) => {
     //! TODO: might add index validation but I think not required
     const activeIndex = get().activeIndex;
