@@ -85,6 +85,12 @@
         align-items: center;
         gap: 8px;
 
+        svg {
+          height: 20px;
+          width: 20px;
+          opacity: 0.5;
+        }
+
         span {
           width: 24px;
           height: 24px;
@@ -92,12 +98,6 @@
           align-items: center;
           justify-content: center;
           cursor: pointer;
-        }
-
-        svg {
-          height: 20px;
-          width: 20px;
-          opacity: 0.5;
         }
 
         .emoji-picker {

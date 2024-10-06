@@ -35,9 +35,7 @@ const Dropdown = (props: DropdownProps) => {
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useClickOutside(ref, () => {
-    setIsOpen(false);
-  });
+  useClickOutside(ref, () => isOpen && setIsOpen(false));
 
   return (
     <div className={"dropdown"} ref={ref}>

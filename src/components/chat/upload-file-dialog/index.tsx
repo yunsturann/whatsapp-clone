@@ -17,13 +17,14 @@ import { useFileDialog } from "../../../store/use-file-dialog";
 
 // ** Third Party Imports
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import useClickOutside from "../../../hooks/use-click-outside";
 
 const UploadFileDialog = () => {
   // ** States
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   // ** Refs
-  const emojiPickerRef = useRef<HTMLDivElement>(null);
+  const emojiPickerWrapperRef = useRef<HTMLDivElement>(null);
 
   // ** Stores
   const {
@@ -36,11 +37,18 @@ const UploadFileDialog = () => {
     closeFileDialog,
   } = useFileDialog();
 
+  // ** Hooks
+  useClickOutside(emojiPickerWrapperRef, () => onCloseEmojiPicker());
+
   // ** Variables
   const captionText = selectedFiles[activeIndex].caption || "";
 
   const handleSelectedEmoji = (e: EmojiClickData) => {
     setCaption(captionText + e.emoji);
+  };
+
+  const onCloseEmojiPicker = () => {
+    showEmojiPicker && setShowEmojiPicker(false);
   };
 
   const handleSelectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,21 +123,22 @@ const UploadFileDialog = () => {
             ) : null}
 
             {/* add emojis */}
+            <div ref={emojiPickerWrapperRef} className="emoji-picker-wrapper">
+              <span
+                aria-label="Open emojis panel"
+                title="Open emojis panel"
+                onClick={() => setShowEmojiPicker((prev) => !prev)}
+              >
+                <BsEmojiSmile />
+              </span>
 
-            {/* TODO: USE CLICK OUTSIDE */}
-            <span
-              aria-label="Open emojis panel"
-              title="Open emojis panel"
-              onClick={() => setShowEmojiPicker((prev) => !prev)}
-            >
-              <BsEmojiSmile />
-            </span>
-
-            <div ref={emojiPickerRef} className="emoji-picker">
-              <EmojiPicker
-                open={showEmojiPicker}
-                onEmojiClick={handleSelectedEmoji}
-              />
+              {/* TODO: USE CLICK OUTSIDE */}
+              <div className="emoji-picker">
+                <EmojiPicker
+                  open={showEmojiPicker}
+                  onEmojiClick={handleSelectedEmoji}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -160,6 +169,7 @@ const UploadFileDialog = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       removeSelectedFile(index);
+                      onCloseEmojiPicker();
                     }}
                   >
                     <MdClose />
