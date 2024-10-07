@@ -8,35 +8,70 @@
 
   .message-item {
     padding: 0 63px;
-    margin-top: 8px;
+    margin-top: 6px;
     display: flex;
 
     .content {
       position: relative;
       background-color: #ffffff;
-      max-width: 65%;
       width: fit-content;
-      padding: 6px 7px 8px 9px;
+      max-width: 65%;
+      padding: 3px;
       border-radius: 6px;
-      font-size: 14.2px;
       display: flex;
-      gap: 6px;
+      flex-direction: column;
+      gap: 8px;
+
+      &.has-image {
+        max-width: 246px;
+      }
+
+      .img-container {
+        position: relative;
+        display: flex;
+        flex-direction: row-reverse;
+
+        img {
+          max-width: 240px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      }
 
       &.own {
         background-color: #d9fdd3;
         margin-left: auto;
       }
 
-      img {
-        max-width: 240px;
+      .text-wrapper {
+        position: relative;
+        min-height: 16px;
+        min-width: 100px;
+        padding: 3px 6px 4px 6px;
+
+        p {
+          font-size: 0.88rem;
+          font-weight: 400;
+          list-style: 19px;
+        }
       }
 
       .detail {
+        position: absolute;
+        right: 4px;
+        bottom: 6px;
         display: flex;
         align-items: flex-end;
         color: #667781;
         text-wrap: nowrap;
-        transform: translateY(4px);
+        transform: translateY(5px);
+        opacity: 0.8;
+
+        &.in-image {
+          color: #fff;
+          opacity: 1;
+          transform: translateY(0px);
+        }
 
         span {
           font-size: 11px;

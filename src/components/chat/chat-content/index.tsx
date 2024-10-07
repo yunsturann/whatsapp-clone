@@ -31,7 +31,7 @@ const ChatContent = () => {
   useEffect(() => {
     // ** Go to end of the chat
     chatEnd.current?.scrollIntoView({ behavior: "instant" });
-  }, []);
+  }, [chat]);
 
   useEffect(() => {
     if (!chatId) return;

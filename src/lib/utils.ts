@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { ChangeEvent } from "react";
 
 export const onInputUserName = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,3 +26,16 @@ export const base64ToFile = (base64: string, fileName: string): File => {
 
   return new File([u8arr], fileName, { type: mime });
 };
+
+export function formatFirestoreTimestampToTime(timestamp: Timestamp) {
+  const date = new Date(timestamp.seconds * 1000); // Convert seconds to milliseconds
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours ? hours : 12; // Convert hour '0' to '12'
+  const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${hours}:${formattedMinutes} ${ampm}`;
+}

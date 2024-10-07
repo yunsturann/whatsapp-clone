@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 // ** User Types
 export interface IUser {
   id: string;
@@ -27,7 +29,7 @@ export interface IChatListData extends IChatListItem {
 
 // ** Chat Types
 export interface IMessage {
-  createdAt: string;
+  createdAt: Timestamp;
   senderId: string;
   text: string;
   img?: string;

@@ -48,7 +48,7 @@
 
     img {
       max-width: 480px;
-      max-height: 586px;
+      max-height: 560px;
       object-fit: contain;
       user-select: none;
     }
