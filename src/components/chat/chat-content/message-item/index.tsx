@@ -13,7 +13,11 @@ import { IMessage } from "../../../../types";
 
 // ** Hooks
 import useLineCount from "../../../../hooks/use-line-count";
+
+// ** Third Party Imports
 import classNames from "classnames";
+
+// ** Utils
 import { formatFirestoreTimestampToTime } from "../../../../lib/utils";
 
 interface MessageItemProps {

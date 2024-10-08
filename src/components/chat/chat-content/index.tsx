@@ -47,7 +47,7 @@ const ChatContent = () => {
     <div className="chat-content">
       {chat?.messages.map((message) => (
         <MessageItem
-          key={message.createdAt}
+          key={message.createdAt.seconds}
           isOwn={currentUser?.id === message.senderId}
           message={message}
         />
