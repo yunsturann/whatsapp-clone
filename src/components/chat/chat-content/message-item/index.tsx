@@ -96,9 +96,13 @@ const MessageItem = (props: MessageItemProps) => {
           triggerElement={
             <div
               className="action"
-              style={{ backgroundColor: isOwn ? "#d9fdd3" : "#ffffff" }}
+              style={
+                hasImage
+                  ? { backgroundColor: "transparent" }
+                  : { backgroundColor: isOwn ? "#d9fdd3" : "#ffffff" }
+              }
             >
-              <IoChevronDown />
+              <IoChevronDown style={{ color: hasImage ? "#fff" : "#667781" }} />
             </div>
           }
         >

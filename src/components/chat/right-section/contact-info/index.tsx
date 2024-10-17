@@ -15,7 +15,11 @@ import { IoMdTimer } from "react-icons/io";
 // ** Store
 import { useChatStore } from "../../../../store/use-chat-store";
 
+// ** Custom Components
+import SharedMedia from "./shared-media";
+
 const ContactInfo = () => {
+  // ** Stores
   const { chatUser } = useChatStore();
 
   return (
@@ -39,28 +43,7 @@ const ContactInfo = () => {
       )}
 
       {/* Shared Media  */}
-      <div className="shared-media">
-        <div className="header">
-          <h4>Media, links and docs</h4>
-          <div className="right">
-            <div>240</div>
-            <IoChevronForwardOutline />
-          </div>
-        </div>
-
-        {/* Media Preview */}
-        <div className="media-preview">
-          <div className="preview-item">
-            <img src="/images/nature.jpg" alt="" />
-          </div>
-          <div className="preview-item">
-            <img src="/images/nature.jpg" alt="" />
-          </div>
-          <div className="preview-item">
-            <img src="/images/nature.jpg" alt="" />
-          </div>
-        </div>
-      </div>
+      <SharedMedia />
 
       {/* Chat actions */}
       <div className="chat-actions">

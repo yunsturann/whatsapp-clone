@@ -3,7 +3,7 @@
 import "./chat-content.css";
 
 // ** React Imports
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef } from "react";
 
 // ** Custom Components
 import MessageItem from "./message-item";
@@ -18,36 +18,35 @@ import { db } from "../../../config/firebase";
 import { IChat } from "../../../types";
 
 const ChatContent = () => {
-  // ** States
-  const [chat, setChat] = useState<IChat | null>(null);
-
   // ** Refs
   const chatEnd = useRef<HTMLDivElement | null>(null);
 
   // ** Stores
-  const chatId = useChatStore((state) => state.chatId);
+  const { chatId, messages, setMessages } = useChatStore();
   const currentUser = useUserStore((state) => state.currentUser);
 
   useEffect(() => {
     // ** Go to end of the chat
     chatEnd.current?.scrollIntoView({ behavior: "instant" });
-  }, [chat]);
+  }, [chatId, messages]);
 
   useEffect(() => {
     if (!chatId) return;
 
     const unSub = onSnapshot(doc(db, "chats", chatId), (response) => {
-      setChat(response.data() as IChat);
+      const messageData = response.data() as IChat;
+      console.log(messageData);
+      setMessages(messageData.messages);
     });
 
     return () => unSub();
-  }, [chatId]);
+  }, [chatId, setMessages]);
 
   return (
     <div className="chat-content">
-      {chat?.messages.map((message) => (
+      {messages.map((message) => (
         <MessageItem
-          key={message.createdAt.seconds}
+          key={message.createdAt.toString()}
           isOwn={currentUser?.id === message.senderId}
           message={message}
         />

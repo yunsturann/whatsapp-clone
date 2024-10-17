@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { IUser } from "../../types";
+import { IMessage, IUser } from "../../types";
 import { useUserStore } from "../use-user-store";
 
 interface ChatStore {
@@ -10,6 +10,8 @@ interface ChatStore {
   setChat: (chatId: string, chatUser: IUser) => void;
   toggleBlockUser: () => void;
   resetChat: () => void;
+  messages: IMessage[];
+  setMessages: (messages: IMessage[]) => void;
 }
 
 export const useChatStore = create<ChatStore>((set) => ({
@@ -39,5 +41,9 @@ export const useChatStore = create<ChatStore>((set) => ({
       isCurrentUserBlocked: false,
       isChatUserBlocked: false,
     });
+  },
+  messages: [],
+  setMessages: (messages) => {
+    set({ messages });
   },
 }));

@@ -45,53 +45,6 @@
     }
   }
 
-  .shared-media {
-    background: #ffffff;
-    padding: 17px 30px 19px;
-    color: #667781;
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      cursor: pointer;
-
-      .right {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        svg {
-          width: 21px;
-          height: 21px;
-        }
-      }
-    }
-  }
-
-  .media-preview {
-    margin-top: 12px;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-
-    .preview-item {
-      border-radius: 20px;
-      height: 116px;
-      width: 116px;
-      padding: 5px;
-      background: linear-gradient(180deg, #ebecee 70%, #111b2173 100%);
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 14px;
-      }
-    }
-  }
-
   .chat-actions {
     padding: 0 30px;
     background-color: #ffffff;
