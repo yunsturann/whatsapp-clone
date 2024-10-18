@@ -39,8 +39,6 @@ const CreateMessage = () => {
     sendMessage(text);
   };
 
-  console.log("create message");
-
   return (
     <div className="create-message">
       {/* icons emoji & attach */}

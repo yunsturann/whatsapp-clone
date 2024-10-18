@@ -27,14 +27,15 @@
       padding: 1px 0;
 
       .sender {
-        font-size: 14px;
+        font-size: 0.875rem;
         color: #111b21;
         font-weight: 500;
       }
 
       .time {
-        font-size: 13px;
+        font-size: 0.78rem;
         color: #667781;
+        letter-spacing: 0.4px;
       }
     }
   }

@@ -13,7 +13,20 @@ import { useShowFileDialog } from "../../../store/use-show-file-dialog";
 
 const DialogHeader = () => {
   // ** Stores
-  const { onClose } = useShowFileDialog();
+  const { onClose, selectedFile } = useShowFileDialog();
+
+  if (!selectedFile) return null;
+
+  const formattedDate = new Date(selectedFile.createdAt.seconds * 1000)
+    .toLocaleString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    })
+    .replace(",", " at");
 
   return (
     <div className="dialog-header">
@@ -25,7 +38,7 @@ const DialogHeader = () => {
         {/*  Sender & Submit Time*/}
         <div className="texts">
           <p className="sender">Yunus Turan</p>
-          <p className="time">10/14/2024 at 9:12 PM</p>
+          <p className="time">{formattedDate}</p>
         </div>
       </div>
 

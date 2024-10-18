@@ -1,4 +1,6 @@
 import "./show-file-dialog.css";
+// ** React Imports
+import { useEffect } from "react";
 
 // ** Custom Components
 import DialogHeader from "./dialog-header";
@@ -9,7 +11,19 @@ import { useShowFileDialog } from "../../store/use-show-file-dialog";
 
 const ShowFileDialog = () => {
   // ** Stores
-  const { selectedFile } = useShowFileDialog();
+  const { selectedFile, onClose } = useShowFileDialog();
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [onClose]);
 
   if (!selectedFile) return null;
 
