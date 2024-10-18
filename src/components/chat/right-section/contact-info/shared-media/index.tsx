@@ -5,10 +5,12 @@ import { IoChevronForwardOutline } from "react-icons/io5";
 
 // ** Stores
 import { useChatStore } from "../../../../../store/use-chat-store";
+import { useShowFileDialog } from "../../../../../store/use-show-file-dialog";
 
 const SharedMedia = () => {
   // ** Stores
   const messages = useChatStore((state) => state.messages);
+  const setSelectedFile = useShowFileDialog((state) => state.setSelectedFile);
 
   // ** Variables
   const chatImages = messages.filter((message) => message.img);
@@ -27,7 +29,11 @@ const SharedMedia = () => {
       {/* Media Preview */}
       <div className="media-preview">
         {lastThreeImages.map((item) => (
-          <div key={item.createdAt.toString()} className="preview-item">
+          <div
+            key={item.createdAt.seconds.toString()}
+            className="preview-item"
+            onClick={() => setSelectedFile(item)}
+          >
             <img src={item.img} alt={`Sended image`} />
           </div>
         ))}

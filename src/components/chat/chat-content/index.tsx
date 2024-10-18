@@ -35,7 +35,6 @@ const ChatContent = () => {
 
     const unSub = onSnapshot(doc(db, "chats", chatId), (response) => {
       const messageData = response.data() as IChat;
-      console.log(messageData);
       setMessages(messageData.messages);
     });
 

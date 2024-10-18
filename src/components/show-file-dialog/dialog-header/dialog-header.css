@@ -1,0 +1,52 @@
+.show-file-dialog .dialog-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  .detail {
+    flex: 1;
+    margin: 0 5px;
+    display: flex;
+    gap: 2px;
+
+    img {
+      flex-shrink: 0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      margin: 0 13px;
+    }
+
+    .texts {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1px 0;
+
+      .sender {
+        font-size: 14px;
+        color: #111b21;
+        font-weight: 500;
+      }
+
+      .time {
+        font-size: 13px;
+        color: #667781;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-right: 18px;
+
+    svg {
+      color: rgb(73, 89, 99);
+    }
+  }
+}

@@ -1,10 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import "./right-section.css";
 
 // ** React Imports
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
 // ** Icons
 import { MdClose } from "react-icons/md";
+
+// ** Store
 import { useRightbarOptions } from "../../../store/use-rightbar-options";
 
 export interface RightSectionProps {
@@ -34,4 +38,4 @@ const RightSection = (props: RightSectionProps) => {
   );
 };
 
-export default RightSection;
+export default memo(RightSection);

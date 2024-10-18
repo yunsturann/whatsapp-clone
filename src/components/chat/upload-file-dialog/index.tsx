@@ -13,7 +13,7 @@ import { FaPlus } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
 
 // ** Store
-import { useFileDialog } from "../../../store/use-file-dialog";
+import { useFileDialog } from "../../../store/use-upload-file-dialog";
 
 // ** Third Party Imports
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";

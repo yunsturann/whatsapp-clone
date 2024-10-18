@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import Auth from "./components/auth";
 import Chat from "./components/chat";
 import Sidebar from "./components/sidebar";
+import ShowFileDialog from "./components/show-file-dialog";
 
 // ** Store
 import { useUserStore } from "./store/use-user-store";
@@ -33,6 +34,8 @@ function App() {
 
   return (
     <>
+      <Toaster />
+
       <div className="main-background"></div>
       <main className="app shadow-sm">
         {currentUser ? (
@@ -47,7 +50,9 @@ function App() {
           <Auth />
         )}
       </main>
-      <Toaster />
+
+      {/* When user select a photo from Chat */}
+      <ShowFileDialog />
     </>
   );
 }

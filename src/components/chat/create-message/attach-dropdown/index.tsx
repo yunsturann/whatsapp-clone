@@ -10,7 +10,7 @@ import { FaCamera, FaPlus } from "react-icons/fa6";
 import useClickOutside from "../../../../hooks/use-click-outside";
 
 // ** Store
-import { useFileDialog } from "../../../../store/use-file-dialog";
+import { useFileDialog } from "../../../../store/use-upload-file-dialog";
 
 const AttachDropdown = () => {
   // ** Refs

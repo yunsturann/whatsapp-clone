@@ -3,7 +3,7 @@ import "./chat.css";
 // ** Store
 import { useRightbarOptions } from "../../store/use-rightbar-options";
 import { useChatStore } from "../../store/use-chat-store";
-import { useFileDialog } from "../../store/use-file-dialog";
+import { useFileDialog } from "../../store/use-upload-file-dialog";
 
 // ** Custom Components
 import ChatContent from "./chat-content";

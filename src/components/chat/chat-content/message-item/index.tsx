@@ -20,6 +20,9 @@ import classNames from "classnames";
 // ** Utils
 import { formatFirestoreTimestampToTime } from "../../../../lib/utils";
 
+// ** Stores
+import { useShowFileDialog } from "../../../../store/use-show-file-dialog";
+
 interface MessageItemProps {
   message: IMessage;
   isOwn: boolean;
@@ -30,6 +33,9 @@ const MessageItem = (props: MessageItemProps) => {
 
   // ** States
   const [showDropdown, setShowDropdown] = useState(false);
+
+  // ** Stores
+  const setSelectedFile = useShowFileDialog((state) => state.setSelectedFile);
 
   // ** Hooks
   const { lineCount, ref } = useLineCount();
@@ -64,7 +70,11 @@ const MessageItem = (props: MessageItemProps) => {
       >
         {hasImage && (
           <div className="img-container">
-            <img src={message.img} alt="Message file" />
+            <img
+              src={message.img}
+              alt="Message file"
+              onClick={() => setSelectedFile(message)}
+            />
 
             {message.text.length === 0 && (
               <div className="detail in-image">
