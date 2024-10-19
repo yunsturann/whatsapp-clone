@@ -33,6 +33,8 @@ const ChatUserDetail = () => {
   }, []);
 
   const handleContactInfo = () => {
+    setIsMenuOpen(false);
+
     setIsRightSectionOpen(true);
 
     setRightSectionProps({
@@ -42,6 +44,8 @@ const ChatUserDetail = () => {
   };
 
   const handleSearchMessages = () => {
+    setIsMenuOpen(false);
+
     setIsRightSectionOpen(true);
 
     setRightSectionProps({

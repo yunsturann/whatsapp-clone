@@ -1,39 +1,6 @@
 .filter-chat-list {
   padding: 7px 12px;
 
-  .search {
-    background: var(--light-gray);
-    padding: 7px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    border-radius: 6px;
-    color: #3b4a54;
-
-    .search-icon {
-      height: 20px;
-      width: 20px;
-      cursor: pointer;
-    }
-
-    input {
-      flex: 1;
-      background: transparent;
-      font-size: 15px;
-      color: #3b4a54;
-      outline: none;
-      border: none;
-      letter-spacing: -0.025em;
-    }
-
-    .x-icon {
-      height: 20px;
-      width: 20px;
-      cursor: pointer;
-    }
-  }
-
   .chip-boxes {
     margin-top: 8px;
     display: flex;
