@@ -1,0 +1,40 @@
+.search-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .inputs-wrapper {
+    padding: 7px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: rgba(11, 20, 26, 0.08) 0px 2px 3px 0px;
+
+    .date-picker {
+      svg {
+        color: rgb(102, 119, 129);
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .search-input {
+      flex: 1;
+    }
+  }
+
+  .information {
+    height: 164px;
+    padding: 72px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      color: #667781;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  }
+}

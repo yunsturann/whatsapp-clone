@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  border-right: 1px solid var(--border-gray);
 
   .navbar {
     display: flex;
@@ -12,7 +13,6 @@
     align-items: center;
     padding: 10px 16px;
     background: var(--light-gray);
-    border-right: 1px solid var(--border-gray);
 
     .avatar {
       width: 40px;
