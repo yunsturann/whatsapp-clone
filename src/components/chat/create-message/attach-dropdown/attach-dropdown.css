@@ -36,6 +36,8 @@
     padding: 10px 0;
     width: 204px;
     transform-origin: left bottom;
+    transform: scale(0);
+    opacity: 0;
 
     &.open {
       animation: open 0.3s forwards;

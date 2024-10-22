@@ -3,7 +3,7 @@
 import "./create-message.css";
 
 // ** React Imports
-import { FormEvent, memo, useState } from "react";
+import { FormEvent, memo, useEffect, useState } from "react";
 
 // ** Third Party Libs
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
@@ -19,6 +19,7 @@ import { useCreateMessage } from "../../../store/use-create-message";
 
 // ** Custom Components
 import AttachDropdown from "./attach-dropdown";
+import { useChatStore } from "../../../store/use-chat-store";
 
 const CreateMessage = () => {
   // ** States
@@ -26,6 +27,12 @@ const CreateMessage = () => {
 
   // ** Stores
   const { text, setText, isSubmitting, sendMessage } = useCreateMessage();
+  const chatId = useChatStore((state) => state.chatId);
+
+  // ** Effects
+  useEffect(() => {
+    setText("");
+  }, [chatId, setText]);
 
   const handleSelectedEmoji = (e: EmojiClickData) => {
     setText((prev) => prev + e.emoji);

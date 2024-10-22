@@ -1,3 +1,5 @@
+import "./message-item.css";
+
 // ** React Imports
 import { MouseEvent, useState } from "react";
 
@@ -67,6 +69,7 @@ const MessageItem = (props: MessageItemProps) => {
         })}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        data-key={message.createdAt.seconds.toString()}
       >
         {hasImage && (
           <div className="img-container">

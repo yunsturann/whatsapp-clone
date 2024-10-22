@@ -36,8 +36,25 @@ const FilteredMessageItem = (props: FilteredMessageItemProps) => {
     );
   };
 
+  const handleClickFoundMessage = () => {
+    const foundedMessageElement = document.querySelector(
+      `.message-item [data-key="${message.createdAt.seconds.toString()}"]`
+    );
+
+    foundedMessageElement?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    foundedMessageElement?.classList.add("animate");
+
+    setTimeout(() => {
+      foundedMessageElement?.classList.remove("animate");
+    }, 1000);
+  };
+
   return (
-    <li className="filtered-message-item">
+    <li className="filtered-message-item" onClick={handleClickFoundMessage}>
       {/* Date */}
       <span>{date.toLocaleDateString()}</span>
 

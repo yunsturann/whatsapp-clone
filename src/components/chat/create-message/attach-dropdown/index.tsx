@@ -32,8 +32,10 @@ const AttachDropdown = () => {
   // ** Open And Close
   const handleClickAttach = () => {
     attachIconRef.current?.classList.toggle("active");
-    attachDropdownRef.current?.classList.toggle("open");
-    attachDropdownRef.current?.classList.toggle("close");
+
+    const isOpen = attachDropdownRef.current?.classList.contains("open");
+    attachDropdownRef.current?.classList.toggle("open", !isOpen);
+    attachDropdownRef.current?.classList.toggle("close", isOpen);
   };
 
   const handlePhotosAndVideos = () => {
@@ -64,7 +66,7 @@ const AttachDropdown = () => {
       </span>
 
       {/* Animated Dropdown */}
-      <ul ref={attachDropdownRef} className="attach-dropdown close">
+      <ul ref={attachDropdownRef} className="attach-dropdown">
         <li onClick={handlePhotosAndVideos}>
           <FaPhotoVideo style={{ color: "#2563eb" }} />
           <p>Photos & videos</p>

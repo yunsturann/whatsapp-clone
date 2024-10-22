@@ -1,0 +1,135 @@
+.chat-content .message-item {
+  padding: 0 63px;
+  margin-top: 6px;
+  display: flex;
+
+  .content {
+    position: relative;
+    background-color: #ffffff;
+    width: fit-content;
+    max-width: 65%;
+    padding: 3px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &.animate {
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        border-radius: 6px;
+        animation: fadeToTransparentOverlay 1s;
+      }
+    }
+
+    &.has-image {
+      max-width: 246px;
+    }
+
+    .img-container {
+      position: relative;
+      display: flex;
+      flex-direction: row-reverse;
+
+      img {
+        max-width: 240px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+
+    &.own {
+      background-color: #d9fdd3;
+      margin-left: auto;
+    }
+
+    .text-wrapper {
+      position: relative;
+      min-height: 16px;
+      min-width: 100px;
+      padding: 3px 6px 4px 6px;
+
+      p {
+        font-size: 0.88rem;
+        font-weight: 400;
+        list-style: 19px;
+      }
+    }
+
+    .detail {
+      position: absolute;
+      right: 4px;
+      bottom: 6px;
+      display: flex;
+      align-items: flex-end;
+      color: #667781;
+      text-wrap: nowrap;
+      transform: translateY(5px);
+      opacity: 0.8;
+
+      &.in-image {
+        color: #fff;
+        opacity: 1;
+        transform: translateY(0px);
+      }
+
+      span {
+        font-size: 11px;
+        margin-right: 3px;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        transform: translateY(2px);
+      }
+    }
+
+    .dropdown {
+      position: absolute !important;
+      top: 0 !important;
+      right: 0 !important;
+      z-index: 100;
+
+      .wrapper {
+        width: 170px;
+      }
+
+      .action {
+        padding: 3px;
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(10px);
+        cursor: pointer;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        &.show {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateX(0);
+          transition: opacity 0.3s, transform 0.15s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeToTransparentOverlay {
+  0% {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  80% {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
