@@ -7,6 +7,8 @@ import { memo, useEffect, useRef } from "react";
 
 // ** Custom Components
 import MessageItem from "./message-item";
+
+// ** Stores
 import { useChatStore } from "../../../store/use-chat-store";
 import { useUserStore } from "../../../store/use-user-store";
 
@@ -26,8 +28,15 @@ const ChatContent = () => {
   const currentUser = useUserStore((state) => state.currentUser);
 
   useEffect(() => {
-    // ** Go to end of the chat
     chatEnd.current?.scrollIntoView({ behavior: "instant" });
+
+    // ** Go to end of the chat. ScrollToEnd
+    const id = setTimeout(
+      () => chatEnd.current?.scrollIntoView({ behavior: "instant" }),
+      500
+    );
+
+    return () => clearTimeout(id);
   }, [chatId, messages]);
 
   useEffect(() => {

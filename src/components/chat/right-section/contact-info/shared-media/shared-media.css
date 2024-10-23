@@ -22,25 +22,31 @@
     }
   }
 
-  .media-preview {
-    margin-top: 12px;
+  .wrapper {
     display: flex;
     justify-content: center;
-    gap: 10px;
 
-    .preview-item {
-      border-radius: 20px;
-      height: 110px;
-      width: 110px;
-      padding: 5px;
-      background: linear-gradient(180deg, #ebecee 70%, #111b2173 100%);
-      cursor: pointer;
+    .media-preview {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      justify-items: center;
+      gap: 10px;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 14px;
+      .preview-item {
+        border-radius: 20px;
+        height: 110px;
+        width: 116px;
+        padding: 5px;
+        background: linear-gradient(180deg, #ebecee 70%, #111b2173 100%);
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 14px;
+        }
       }
     }
   }

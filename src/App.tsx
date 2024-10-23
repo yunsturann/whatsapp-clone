@@ -51,7 +51,7 @@ function App() {
         )}
       </main>
 
-      {/* When user select a photo from Chat */}
+      {/* When user select a file/photo from Chat */}
       <ShowFileDialog />
     </>
   );

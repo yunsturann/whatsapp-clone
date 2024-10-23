@@ -27,16 +27,18 @@ const SharedMedia = () => {
       </div>
 
       {/* Media Preview */}
-      <div className="media-preview">
-        {lastThreeImages.map((item) => (
-          <div
-            key={item.createdAt.seconds.toString()}
-            className="preview-item"
-            onClick={() => setSelectedFile(item)}
-          >
-            <img src={item.img} alt={`Sended image`} />
-          </div>
-        ))}
+      <div className="wrapper">
+        <div className="media-preview">
+          {lastThreeImages.map((item) => (
+            <div
+              key={item.createdAt.seconds.toString()}
+              className="preview-item"
+              onClick={() => setSelectedFile(item)}
+            >
+              <img src={item.img} alt="Shared media preview" />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
